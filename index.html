@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des appartements</title>
+    <h1>Liste des appartements</h1>
+    <button class="home-button" onclick="window.location.href = 'accueil.html';">Accueil</button>
+    <container class="container"><button class="creationDemande" onclick="window.location.href = 'creationDemande.html';">Nouvelle demande</button></container>
+    <br>
+    <br>
+</head>
+
+<body>
+    <br>
+    <br>
+    <form id="filterForm" class="filterForm" action="index.html">
+        <div id="priceSlider"></div>
+        <input type="text" id="minPrice" readonly>
+        <input type="text" id="maxPrice" readonly>
+        <label id="typappart">Type d'appartement</label>
+        <select id="TYPAPPART">
+            <option>--</option>
+            <option>STUDIO</option>
+            <option>F1</option>
+            <option>F2</option>
+            <option>F3</option>
+            <option>F4</option>
+            <option>F5</option>
+        </select>
+        <label id="arrondissement">Arrondissement</label>
+        <select id="ARRONDISSEMENT">
+            <option>--</option>
+            <script>
+                for (var i = 1; i <= 25; i++) {
+                    document.write('<option>' + i + '</option>');
+                }
+            </script>
+        </select>
+        <label id="etage">Étage</label>
+        <select id="ETAGE">
+            <option>--</option>
+            <script>
+                for (var i = 1; i <= 14; i++) {
+                    document.write('<option>' + i + '</option>');
+                }
+            </script>
+        </select>
+        <label id="ascenseur">Ascenseur</label>
+        <select id="ASCENSEUR">
+            <option>Indifférent</option>
+            <option>Oui</option>
+            <option>Non</option>
+        </select>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const priceSlider = document.getElementById('priceSlider');
+                const minPriceInput = document.getElementById('minPrice');
+                const maxPriceInput = document.getElementById('maxPrice');
+    
+                noUiSlider.create(priceSlider, {
+                    start: [0, 2000],
+                    connect: true,
+                    range: {
+                        'min': 0,
+                        'max': 2000
+                    },
+                    step: 10,
+                    handles: [
+                        '5%',
+                        '5%'
+                    ]
+                });
+    
+                priceSlider.noUiSlider.on('update', (values, handle) => {
+                    if (handle === 0) {
+                        minPriceInput.value = 'Prix min: ' + values[0] + '€';
+                    } else {
+                        maxPriceInput.value = 'Prix max: ' + values[1] + '€';
+                    }
+                });
+            });
+        </script>
+        <button type="submit">Rechercher</button>
+    </form>
+    <br>
+    <br>
+    <script src="../controleur/requete.js"></script>
+    <div id="tableauAppartements"></div>
+    <script>
+            var minPrice = document.getElementById('minPrice').value;
+            minPrice = minPrice.split(/Prix min: |€/);
+            minPrice = parseInt(minPrice[1]);
+            var maxPrice = document.getElementById('maxPrice').value;
+            maxPrice = maxPrice.split(/Prix max: |€/);
+            maxPrice = parseInt(maxPrice[1]);
+
+            const typAppart = document.getElementById('TYPAPPART').value;
+            const arrondissement = document.getElementById('ARRONDISSEMENT').value;
+            const etage = document.getElementById('ETAGE').value;
+            const ascenseur = document.getElementById('ASCENSEUR').value;
+            getFilteredAppartements(minPrice, maxPrice, typAppart, arrondissement, etage, ascenseur);
+
+        filterForm.addEventListener('submit', function (event) {
+            event.preventDefault()
+
+            var minPrice = document.getElementById('minPrice').value;
+            minPrice = minPrice.split(/Prix min: |€/);
+            minPrice = parseInt(minPrice[1]);
+            var maxPrice = document.getElementById('maxPrice').value;
+            maxPrice = maxPrice.split(/Prix max: |€/);
+            maxPrice = parseInt(maxPrice[1]);
+
+            const typAppart = document.getElementById('TYPAPPART').value;
+            const arrondissement = document.getElementById('ARRONDISSEMENT').value;
+            const etage = document.getElementById('ETAGE').value;
+            const ascenseur = document.getElementById('ASCENSEUR').value;
+            console.log(typAppart, arrondissement, etage, ascenseur, minPrice, maxPrice);
+            
+            getFilteredAppartements(minPrice, maxPrice, typAppart, arrondissement, etage, ascenseur);
+        });
+    </script>
+</body>
+
+</html>

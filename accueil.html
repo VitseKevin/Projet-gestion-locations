@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ebe8e8;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+
+        h2 {
+            margin-top: 180px;
+        }
+
+        .profile {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .profile:hover {
+            transform: scale(1.1);
+        }
+
+        .profile a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: #333333;
+        }
+
+        .profile img {
+            width: 130px;
+            height: 130px;
+            margin: 20px auto;
+            border-radius: 30%;
+            display: block;
+        }
+
+        .profile h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bienvenue sur notre plateforme de gestion de locations d'appartements</h1>
+    <br>
+    <h2>Choisissez un profil:</h2>
+
+    <div class="profile">
+        <a href="index.html">
+            <img src="../images/client.png" alt="Client">
+            <h3>Client</h3>
+        </a>
+    </div>
+
+    <div class="profile">
+        <a href="administrateur.html">
+            <img src="../images/admin.png" alt="Administrateur">
+            <h3>Administrateur</h3>
+        </a>
+    </div>
+
+    <div class="profile">
+        <a href="proprietaire.html">
+            <img src="../images/proprietaire.png" alt="Propriétaire">
+            <h3>Propriétaire</h3>
+        </a>
+    </div>
+</body>
+
+</html>
